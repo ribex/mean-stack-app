@@ -4,11 +4,7 @@ var hotelData = require('../data/hotel-data.json');
 module.exports.hotelsGetAll = function(req, res) {
 
     var db = dbconn.get();
-
-    console.log("db", db);
-    
-    console.log("GET the hotels");
-    console.log(req.query);
+    var collection = db.collection('hotels');
 
     var offset = 0;
     var count = 5;
@@ -21,12 +17,18 @@ module.exports.hotelsGetAll = function(req, res) {
         count = parseInt(req.query.count, 10);
     }
 
-    var returnData = hotelData.slice(offset, offset+count);
 
-    res
-      .status(200)
-      .json( returnData );
-};
+    collection.find()
+    .skip(offset)
+    .limit(count)    
+    .toArray(function(err, docs) {
+        console.log("Found hotels", docs);
+        res
+            .status(200)
+            .json(docs);
+    });
+
+ };
 
 module.exports.hotelsGetOne = function(req, res) {
     var hotelId = req.params.hotelId;
