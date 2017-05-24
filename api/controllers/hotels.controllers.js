@@ -36,8 +36,6 @@ module.exports.hotelsGetOne = function(req, res) {
                 .status(200)
                 .json( doc );
         });
-    
-
 };
 
 module.exports.hotelsAddOne = function(req, res) {
