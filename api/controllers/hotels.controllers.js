@@ -25,7 +25,6 @@ var runGeoQuery = function(req, res) {
                 .status(200)
                 .json(results);
         });
-
 };
 
 module.exports.hotelsGetAll = function(req, res) {
