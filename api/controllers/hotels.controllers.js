@@ -5,6 +5,15 @@ var runGeoQuery = function(req, res) {
 
     var lng = parseFloat(req.query.lng);
     var lat = parseFloat(req.query.lat);
+
+    if (isNaN(lng) || isNaN(lat)) {
+        res
+            .status(400)
+            .json({
+                "message" : "If supplied in querystring, lng and lat must both be numbers"
+            });
+        return;
+    }
     
     var point = {
         type : "Point",
@@ -21,9 +30,16 @@ var runGeoQuery = function(req, res) {
         .geoNear(point, geoOptions, function(err, results, stats) {
             console.log('Geo results', results);
             console.log('Geo stats', stats);
-            res
-                .status(200)
-                .json(results);
+            if (err) {
+                console.log("Error finding hotels");
+                res
+                    .status(500)
+                    .json(err);
+            } else {
+                res
+                    .status(200)
+                    .json(results);
+            }
         });
 
 };
