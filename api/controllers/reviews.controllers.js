@@ -10,8 +10,8 @@ module.exports.reviewsGetAll = function(req, res) {
         .select('reviews')
         .exec(function(err, doc) {
             var response = {
-                status : 200.
-                message = []
+                status : 200,
+                message : {}
             };
             if (err) {
                 console.log("Error finding hotel");
