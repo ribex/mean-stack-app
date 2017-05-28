@@ -41,7 +41,6 @@ var runGeoQuery = function(req, res) {
                     .json(results);
             }
         });
-
 };
 
 module.exports.hotelsGetAll = function(req, res) {
