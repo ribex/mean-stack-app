@@ -48,3 +48,21 @@ module.exports.login = function(req, res) {
         }
     });
 };
+
+module.exports.authenticate = function(req, res, next) {
+    var headerExists = req.headers.authorization;
+    if (headerExists) {
+        var token = req.headers.authorization.split(' ')[1]; // Authorization bearer
+        jwt.verify(token, 's3cr3t', function(error, decoded) {
+            if (error) {
+                console.log(error);
+                res.status(401).json('Unauthorized');
+            } else  {
+                req.user = decoded.username;
+                next();
+            }
+        });
+    } else {
+        res.status(403).json('No token provided');
+    }
+};
