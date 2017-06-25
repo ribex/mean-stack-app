@@ -4,6 +4,9 @@ function config($locationProvider, $routeProvider) {
     $locationProvider.html5Mode(false).hashPrefix('');
     $routeProvider
         .when('/', {
+            templateUrl: 'angular-app/main/main.html',
+        })
+        .when('/hotels', {
             templateUrl: 'angular-app/hotel-list/hotels.html',
             controller: HotelsController,
             controllerAs: 'vm'
@@ -17,5 +20,8 @@ function config($locationProvider, $routeProvider) {
             templateUrl: 'angular-app/register/register.html',
             controller: RegisterController,
             controllerAs: 'vm'
+        })
+        .otherwise({
+            redirectTo: '/'
         });
 }
