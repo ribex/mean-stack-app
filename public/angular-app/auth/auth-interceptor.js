@@ -22,7 +22,7 @@ function AuthInterceptor($location, $q, $window, AuthFactory) {
         if (response.status === 401) {
             AuthFactory.isLoggedIn = false;
         }
-        return response || $q.whgen(response);
+        return response || $q.when(response);
     }
 
     function responseError(rejection) {

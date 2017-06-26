@@ -9,7 +9,7 @@ body {
   margin-bottom: 90px;
 }
 
-.container {
+body > .container {
   padding: 60px 0 0 0;
 }
 .padded {

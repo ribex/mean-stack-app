@@ -1,8 +1,8 @@
 angular.module('meanhotel', ['ngRoute', 'angular-jwt']).config(config).run(run);
 
-function config($httpProvider, $locationProvider, $routeProvider) {
-    $httpProvider.interceptors.push('AuthInterceptor');
+function config($locationProvider, $httpProvider, $routeProvider) {
     $locationProvider.html5Mode(false).hashPrefix('');
+    $httpProvider.interceptors.push('AuthInterceptor');
     $routeProvider
         .when('/', {
             templateUrl: 'angular-app/main/main.html',
@@ -36,7 +36,6 @@ function config($httpProvider, $locationProvider, $routeProvider) {
         })
         .when('/profile', {
             templateUrl: 'angular-app/profile/profile.html',
-            // controllerAs: 'vm',
             access: {
                 restricted: true
             }            

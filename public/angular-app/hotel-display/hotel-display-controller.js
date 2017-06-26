@@ -3,6 +3,7 @@ angular.module('meanhotel').controller('HotelController', HotelController);
 function HotelController($route, $routeParams, $window, hotelDataFactory, AuthFactory, jwtHelper) {
     var vm = this;
     var id = $routeParams.id;
+    vm.isSubmitted = false;
     hotelDataFactory.hotelDisplay(id).then(function(response) {
         // console.log(response); // browser console
         vm.hotel = response.data;
@@ -33,7 +34,7 @@ function HotelController($route, $routeParams, $window, hotelDataFactory, AuthFa
         };
         if (vm.reviewForm.$valid) {
             hotelDataFactory.postReview(id, postData).then(function(response) {
-                if (response.status === 201) {
+                if (response.status === 200) {
                     $route.reload();
                 }
             }).catch(function(error) {
